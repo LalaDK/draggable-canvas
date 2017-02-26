@@ -1,5 +1,5 @@
 require([
-  "lib/requirejs-modules/domReady",
+  "lib/requirejs/domReady",
   "lib/canvas",
   "lib/drawable",
   "lib/drawables/graph/horizontalaxe",
