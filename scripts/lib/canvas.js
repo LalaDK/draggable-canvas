@@ -48,7 +48,7 @@ define(function() {
         }
       });
 
-      this.canvas.addEventListener('mousewheel', function(event) {
+      this.canvas.addEventListener('wheel', function(event) {
         if(event.deltaY !== 0) {
           self.pixelsPerUnitHorizontal *= Math.sign(event.deltaY) > 0 ? 0.909 : 1.1;
           self.pixelsPerUnitVertical *= Math.sign(event.deltaY) > 0 ? 0.909 : 1.1;
