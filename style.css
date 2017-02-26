@@ -5,10 +5,10 @@ html {
 body {
   margin: 0;
   padding:0;
-  background-color: black;
+  background-color: white;
 }
 
 #myCanvas {
-  border: 3px solid red;
-  background-color: #fcfcfc;
+  border: 3px solid grey;
+  background-color: white;
 }

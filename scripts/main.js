@@ -1,12 +1,12 @@
 require([
-  "domReady",
+  "lib/requirejs-modules/domReady",
   "lib/canvas",
   "lib/drawable",
-  "lib/drawables/horizontalaxe",
-  "lib/drawables/verticalaxe",
-  "lib/drawables/graph",
-  "lib/drawables/square",
-  "lib/drawables/axelabels"],
+  "lib/drawables/graph/horizontalaxe",
+  "lib/drawables/graph/verticalaxe",
+  "lib/drawables/graph/graph",
+  "lib/drawables/shapes/square",
+  "lib/drawables/graph/axelabels"],
 function(
   domReady,
   Canvas,
@@ -31,8 +31,8 @@ domReady(function() {
   myCanvas.addObject(new Graph(function(x) {return Math.sin(x)* x;}, "orange", 1));
   myCanvas.addObject(new Graph(function(x) {return Math.sin(x);}, "red", 1));
 
-  if(false) {
-    for(var i = 0; i < 20; i++) {
+  if(true) {
+    for(var i = 0; i < 10; i++) {
       var x = Math.floor(Math.random() * myCanvas.screenX) - (myCanvas.screenX / 2);
       var y = Math.floor(Math.random() * myCanvas.screenY) - (myCanvas.screenY / 2);
       var width = Math.floor(Math.random() * 50 + 10);
