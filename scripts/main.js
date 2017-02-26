@@ -20,7 +20,11 @@ function(
 var myCanvas;
 
 domReady(function() {
+  var element = document.getElementById("myCanvas");
+  element.width = 0.8 * Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  element.height = 0.8 *  Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
   myCanvas = new Canvas("myCanvas", {});
+
   myCanvas.centerScreen();
   myCanvas.addObject(new HorizontalAxe());
   myCanvas.addObject(new VerticalAxe());

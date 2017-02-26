@@ -1,5 +1,11 @@
 define(["lib/drawable"], function(Drawable) {
   class Graph extends Drawable {
+    /**
+    * Create a Graph instance.
+    * @param {function} equation - function representation an eqaution in the form of function(x) {return x * x;}.
+    * @param {string} color - string representing a color
+    * @param {integer} thickness - an integer representing the line thickness
+    */
     constructor(equation, color, thickness) {
       super();
       this.equation = equation;
