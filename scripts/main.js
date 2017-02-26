@@ -20,7 +20,7 @@ function(
 var myCanvas;
 
 domReady(function() {
-  myCanvas = new Canvas(0,0, "myCanvas");
+  myCanvas = new Canvas("myCanvas", {});
   myCanvas.centerScreen();
   myCanvas.addObject(new HorizontalAxe());
   myCanvas.addObject(new VerticalAxe());
