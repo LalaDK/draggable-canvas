@@ -21,9 +21,9 @@ define(["lib/drawable"], function(Drawable) {
 
     draw(canvas) {
       var positionX = this.positionX * canvas.pixelsPerUnitHorizontal;
-      var positionY = this.positionY * canvas.pixelsPerUnitHorizontal;
+      var positionY = -(this.positionY * canvas.pixelsPerUnitVertical);
       var width = this.width * canvas.pixelsPerUnitHorizontal;
-      var height = this.height * canvas.pixelsPerUnitHorizontal;
+      var height = -(this.height * canvas.pixelsPerUnitVertical);
 
       canvas.context.fillStyle = this.fillColor || "black";
       canvas.context.fillRect(canvas.centerX + positionX, canvas.centerY + positionY, width, height);

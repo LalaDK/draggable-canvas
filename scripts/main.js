@@ -26,10 +26,12 @@ domReady(function() {
   myCanvas = new Canvas("myCanvas", {});
 
   myCanvas.centerScreen();
-  var a = new HorizontalAxe();
-  myCanvas.addObject(a);
+  myCanvas.addObject(new HorizontalAxe());
   myCanvas.addObject(new VerticalAxe());
   myCanvas.addObject(new AxeLabels());
+  myCanvas.addObject(new Square(1, 1, 2, 2));
+  /*
+  myCanvas.addObject(a);
   //myCanvas.addObject(new Square(0,0, 10, 10, "red", "black", 1));
   myCanvas.addObject(new Graph(function(x) {return x;}, "blue", 2));
   myCanvas.addObject(new Graph(function(x) {return -0.1*x*x + 5;}, "green", 3));
@@ -45,8 +47,8 @@ domReady(function() {
       myCanvas.addObject(new Square(x, y, width, height, "blue", "yellow", Math.floor(Math.random()*5)));
     }
   }
-
+*/
   myCanvas.draw();
-  myCanvas.viewRangeByHorizontalUnits(-1, 100.5);
+  myCanvas.viewRangeByUnits(-1, 100.5, -8, 105);
 }, false);
 });

@@ -25,7 +25,7 @@ define(["lib/drawable"], function(Drawable) {
         if(result === -0) {
           result = 0;
         }
-        canvas.context.lineTo(canvas.centerX + (x * canvas.pixelsPerUnitHorizontal), canvas.centerY + (-result * canvas.pixelsPerUnitHorizontal));
+        canvas.context.lineTo(canvas.centerX + (x * canvas.pixelsPerUnitHorizontal), canvas.centerY + (-result * canvas.pixelsPerUnitVertical));
       }
       canvas.context.lineJoin = 'round';
       canvas.context.stroke();

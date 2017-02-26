@@ -51,6 +51,7 @@ define(function() {
       this.canvas.addEventListener('mousewheel', function(event) {
         if(event.deltaY !== 0) {
           self.pixelsPerUnitHorizontal *= Math.sign(event.deltaY) > 0 ? 0.909 : 1.1;
+          self.pixelsPerUnitVertical *= Math.sign(event.deltaY) > 0 ? 0.909 : 1.1;
           self.context.setTransform(1, 0, 0, 1, 0, 0);
           self.centerScreen();
           self.redraw();
@@ -79,11 +80,13 @@ define(function() {
       }
     };
 
-    viewRangeByHorizontalUnits(x1, x2) {
-      if(x1 < x2) {
-        var distance = x2 - x1;
-        this.pixelsPerUnitHorizontal = this.screenX / distance;
-        this.moveCenter(-(self.centerX + (x1 * this.pixelsPerUnitHorizontal)), 0);
+    viewRangeByUnits(x1, x2, y1, y2) {
+      if(x1 < x2 && y1 < y2) {
+        var horizontalDistance = x2 - x1;
+        var verticalDistance = y2 - y1;
+        this.pixelsPerUnitHorizontal = this.screenX / horizontalDistance;
+        this.pixelsPerUnitVertical = this.screenY / verticalDistance;
+        this.moveCenter(-(self.centerX + (x1 * this.pixelsPerUnitHorizontal)), (self.centerY + (y1 * this.pixelsPerUnitVertical)));
         this.redraw();
       }
     }
@@ -130,6 +133,7 @@ define(function() {
         screenX: self.screenX,
         screenY: self.screenY,
         pixelsPerUnitHorizontal: self.pixelsPerUnitHorizontal,
+        pixelsPerUnitVertical: self.pixelsPerUnitVertical,
         removeObject: self.removeObject
       };
       this.objects.forEach(function(obj) {

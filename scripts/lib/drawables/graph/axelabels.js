@@ -4,19 +4,17 @@ define(["lib/drawable"], function(Drawable) {
       super();
     }
     draw(canvas) {
-      var stepDistance = canvas.pixelsPerUnitHorizontal;
-      var multiplier = 1;
-      if(stepDistance < 30) {
-        multiplier = Math.floor(30 / stepDistance);
-      }
-      var stepWidth = 10;
-      var textDistance = stepWidth;
+      var horizontalMultiplier = (canvas.pixelsPerUnitHorizontal < 30 ? Math.floor(30 / canvas.pixelsPerUnitHorizontal) : 1);
+      var verticalMultiplier = (canvas.pixelsPerUnitVertical < 30 ? Math.floor(30 / canvas.pixelsPerUnitVertical) : 1);
+      var stepWidth = 5;
+      var textDistance = stepWidth + 5;
+
       // Horizontal lines
       canvas.context.textAlign = "center";
-      for(var x = canvas.centerX; x >= -canvas.screenX; x -= stepDistance * multiplier) {
-        var number = Math.round((x - canvas.centerX) / stepDistance);
+      canvas.context.strokeStyle = "red";
+      for(var x = canvas.centerX; x >= -canvas.screenX; x -= canvas.pixelsPerUnitHorizontal * horizontalMultiplier) {
+        var number = Math.round((x - canvas.centerX) / canvas.pixelsPerUnitHorizontal);
         canvas.context.beginPath();
-        canvas.context.strokeStyle = "green";
         canvas.context.moveTo(x, canvas.centerY - stepWidth);
         canvas.context.lineTo(x, canvas.centerY + stepWidth);
         canvas.context.stroke();
@@ -26,8 +24,8 @@ define(["lib/drawable"], function(Drawable) {
         }
       }
 
-      for(var x = canvas.centerX; x <= canvas.screenX; x += stepDistance * multiplier) {
-        var number = Math.round((x - canvas.centerX) / stepDistance);
+      for(var x = canvas.centerX; x <= canvas.screenX; x += canvas.pixelsPerUnitHorizontal * horizontalMultiplier) {
+        var number = Math.round((x - canvas.centerX) / canvas.pixelsPerUnitHorizontal);
         canvas.context.beginPath();
         canvas.context.moveTo(x, canvas.centerY - stepWidth);
         canvas.context.lineTo(x, canvas.centerY + stepWidth);
@@ -36,24 +34,26 @@ define(["lib/drawable"], function(Drawable) {
           canvas.context.strokeText(number.toString(), x, canvas.centerY + stepWidth + textDistance);
         }
       }
-      for(var y = canvas.centerY; y <= canvas.screenY; y += stepDistance * multiplier) {
-        var number = -Math.round((y - canvas.centerY) / stepDistance);
+
+      // Vertical lines
+      for(var y = canvas.centerY; y <= canvas.screenY; y += canvas.pixelsPerUnitVertical * verticalMultiplier) {
+        var number = -Math.round((y - canvas.centerY) / canvas.pixelsPerUnitVertical);
         canvas.context.beginPath();
         canvas.context.moveTo(canvas.centerX - stepWidth, y);
         canvas.context.lineTo(canvas.centerX + stepWidth, y);
         canvas.context.stroke();
         if(number < 0) {
-          canvas.context.strokeText(number.toString(), canvas.centerX - stepWidth - textDistance, y);
+          canvas.context.strokeText(number.toString(), canvas.centerX - stepWidth - textDistance, y +3);
         }
       }
-      for(var y = canvas.centerY; y >= 0; y -= stepDistance * multiplier) {
-        var number = -Math.round((y - canvas.centerY) / stepDistance);
+      for(var y = canvas.centerY; y >= 0; y -= canvas.pixelsPerUnitVertical * verticalMultiplier) {
+        var number = -Math.round((y - canvas.centerY) / canvas.pixelsPerUnitVertical);
         canvas.context.beginPath();
         canvas.context.moveTo(canvas.centerX - stepWidth, y);
         canvas.context.lineTo(canvas.centerX + stepWidth, y);
         canvas.context.stroke();
         if(number > 0) {
-          canvas.context.strokeText(number.toString(), canvas.centerX + stepWidth + textDistance, y);
+          canvas.context.strokeText(number.toString(), canvas.centerX + stepWidth + textDistance, y + 3);
         }
       }
     }
