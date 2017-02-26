@@ -6,7 +6,8 @@ require([
   "lib/drawables/graph/verticalaxe",
   "lib/drawables/graph/graph",
   "lib/drawables/shapes/square",
-  "lib/drawables/graph/axelabels"],
+  "lib/drawables/graph/axelabels",
+  "lib/drawables/shapes/screencross"],
 function(
   domReady,
   Canvas,
@@ -15,7 +16,8 @@ function(
   VerticalAxe,
   Graph,
   Square,
-  AxeLabels
+  AxeLabels,
+  ScreenCross
 ) {
 var myCanvas;
 
@@ -30,9 +32,7 @@ domReady(function() {
   myCanvas.addObject(new VerticalAxe());
   myCanvas.addObject(new AxeLabels());
   myCanvas.addObject(new Square(1, 1, 2, 2));
-  /*
-  myCanvas.addObject(a);
-  //myCanvas.addObject(new Square(0,0, 10, 10, "red", "black", 1));
+  myCanvas.addObject(new ScreenCross());
   myCanvas.addObject(new Graph(function(x) {return x;}, "blue", 2));
   myCanvas.addObject(new Graph(function(x) {return -0.1*x*x + 5;}, "green", 3));
   myCanvas.addObject(new Graph(function(x) {return Math.sin(x)* x;}, "orange", 1));
@@ -47,8 +47,8 @@ domReady(function() {
       myCanvas.addObject(new Square(x, y, width, height, "blue", "yellow", Math.floor(Math.random()*5)));
     }
   }
-*/
+  myCanvas.centerScreen(10,10);
   myCanvas.draw();
-  myCanvas.viewRangeByUnits(-1, 100.5, -8, 105);
+  //myCanvas.viewRangeByUnits(-50, 3000, -50, 1500);
 }, false);
 });

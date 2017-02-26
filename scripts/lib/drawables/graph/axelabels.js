@@ -12,6 +12,7 @@ define(["lib/drawable"], function(Drawable) {
       // Horizontal lines
       canvas.context.textAlign = "center";
       canvas.context.strokeStyle = "red";
+      canvas.context.font = "8pt normal sans-serif";
       for(var x = canvas.centerX; x >= -canvas.screenX; x -= canvas.pixelsPerUnitHorizontal * horizontalMultiplier) {
         var number = Math.round((x - canvas.centerX) / canvas.pixelsPerUnitHorizontal);
         canvas.context.beginPath();

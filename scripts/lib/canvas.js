@@ -53,7 +53,6 @@ define(function() {
           self.pixelsPerUnitHorizontal *= Math.sign(event.deltaY) > 0 ? 0.909 : 1.1;
           self.pixelsPerUnitVertical *= Math.sign(event.deltaY) > 0 ? 0.909 : 1.1;
           self.context.setTransform(1, 0, 0, 1, 0, 0);
-          self.centerScreen();
           self.redraw();
         }
       });
@@ -97,8 +96,8 @@ define(function() {
     * @param {integer} y - The y position.
     */
     moveCenter(x, y) {
-      this.screenDisplacementX = -Number.parseInt(self.screenX / 2) + x;
-      this.screenDisplacementY = -Number.parseInt(self.screenY / 2) + y;
+      this.screenDisplacementX = -(Number.parseInt(self.screenX / 2) + (x * this.pixelsPerUnitHorizontal));
+      this.screenDisplacementY = (-Number.parseInt(self.screenY / 2) + (y * this.pixelsPerUnitVertical));
       this.computeCenter();
     }
 
