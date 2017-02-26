@@ -4,17 +4,17 @@ define(["lib/drawable"], function(Drawable) {
       super();
       this.color = color;
     }
-    draw(context, centerX, centerY, screenX, screenY) {
-      context.beginPath();
-      context.strokeStyle = this.color || "red";
-      context.lineWidth = 1;
-      context.moveTo(centerX, 0);
-      context.lineTo(centerX, screenY);
-      context.stroke();
-      context.closePath();
+    draw(canvas) {
+      canvas.context.beginPath();
+      canvas.context.strokeStyle = this.color || "red";
+      canvas.context.lineWidth = 1;
+      canvas.context.moveTo(canvas.centerX, 0);
+      canvas.context.lineTo(canvas.centerX, canvas.screenY);
+      canvas.context.stroke();
+      canvas.context.closePath();
     }
-    inBounds(centerX, centerY, screenX, screenY) {
-      return centerX >= 0 && centerX <= screenX;
+    inBounds(canvas) {
+      return canvas.centerX >= 0 && canvas.centerX <= canvas.screenX;
     }
   }
   return VerticalAxe;

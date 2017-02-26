@@ -16,12 +16,17 @@ define(function() {
       this.isDragging = false;
       this.centerX = 0;
       this.centerY = 0;
-      this.pixelsPerUnit = 10;
+      this.pixelsPerUnitHorizontal = 10;
+      this.pixelsPerUnitVertical = 10;
       this.objects = [];
+      this.objectId = 0;
       self = this;
       self.initialize();
     }
 
+    getUniqueId(){
+        return this.objectId++;
+    };
     /** Initializes event listeners on canvas object. Is called from constructor. */
     initialize() {
       this.canvas.addEventListener('mousedown', function(event) {
@@ -44,8 +49,8 @@ define(function() {
       });
 
       this.canvas.addEventListener('mousewheel', function(event) {
-        if(event.deltaY !== 0 && event.deltaY !== NaN) {
-          self.pixelsPerUnit *= Math.sign(event.deltaY) > 0 ? 0.909 : 1.1;
+        if(event.deltaY !== 0) {
+          self.pixelsPerUnitHorizontal *= Math.sign(event.deltaY) > 0 ? 0.909 : 1.1;
           self.context.setTransform(1, 0, 0, 1, 0, 0);
           self.centerScreen();
           self.redraw();
@@ -58,11 +63,33 @@ define(function() {
     * @param {Drawable} obj
     */
     addObject(obj) {
+      obj.id = this.getUniqueId();
       self.objects.push(obj);
     };
 
     /**
-    * Center the view at given coordinates.
+    * Removes drawable object.
+    * @param {integer} identifier
+    */
+    removeObject(id) {
+      var index = self.objects.findIndex(function(obj) {return obj.id === id;});
+      if(index > -1) {
+        self.objects.splice(index, 1);
+        self.redraw();
+      }
+    };
+
+    viewRangeByHorizontalUnits(x1, x2) {
+      if(x1 < x2) {
+        var distance = x2 - x1;
+        this.pixelsPerUnitHorizontal = this.screenX / distance;
+        this.moveCenter(-(self.centerX + (x1 * this.pixelsPerUnitHorizontal)), 0);
+        this.redraw();
+      }
+    }
+
+    /**
+    * Moves the view center relative to the current view center.
     * @param {integer} x - The x position.
     * @param {integer} y - The y position.
     */
@@ -96,9 +123,20 @@ define(function() {
 
     /** Draw all objects. */
     draw() {
+      var canvasObj = {
+        context: self.context,
+        centerX: self.centerX,
+        centerY: self.centerY,
+        screenX: self.screenX,
+        screenY: self.screenY,
+        pixelsPerUnitHorizontal: self.pixelsPerUnitHorizontal,
+        removeObject: self.removeObject
+      };
       this.objects.forEach(function(obj) {
-        if(obj.inBounds(self.centerX, self.centerY, self.screenX, self.screenY)) {
-          obj.draw(self.context, self.centerX, self.centerY, self.screenX, self.screenY, self.pixelsPerUnit);
+        if(!obj.isHidden) {
+          if(obj.inBounds(canvasObj)) {
+            obj.draw(canvasObj);
+          }
         }
       });
     };

@@ -5,19 +5,18 @@ define(function() {
      * @param {number} x - The x value.
      * @param {number} y - The y value.
      */
-    constructor(positionX, positionY) {
+    constructor(positionX, positionY, isHidden) {
       this.positionX = positionX;
       this.positionY = positionY;
+      this.isHidden = isHidden || false;
+      this.id;
     }
-    draw() {};
+    draw(canvasObj) {};
     /**
     * Checks if the object is visible in the view. If not, then it should not be drawn.
-    * @param {integer} centerX - The x coordinate of the center
-    * @param {integer} centerY - The y coordinate of the center
-    * @param {integer} screenX - The width of the view
-    * @param {integer} screenY - The height of the view
+    * @param {Object} canvas object - Containing selected attributes from canvas instance
     */
-    inBounds(centerX, centerY, screenX, screenY) {
+    inBounds(canvasObj) {
       return true;
     };
   }

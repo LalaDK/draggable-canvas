@@ -26,7 +26,8 @@ domReady(function() {
   myCanvas = new Canvas("myCanvas", {});
 
   myCanvas.centerScreen();
-  myCanvas.addObject(new HorizontalAxe());
+  var a = new HorizontalAxe();
+  myCanvas.addObject(a);
   myCanvas.addObject(new VerticalAxe());
   myCanvas.addObject(new AxeLabels());
   //myCanvas.addObject(new Square(0,0, 10, 10, "red", "black", 1));
@@ -46,5 +47,6 @@ domReady(function() {
   }
 
   myCanvas.draw();
+  myCanvas.viewRangeByHorizontalUnits(-1, 100.5);
 }, false);
 });

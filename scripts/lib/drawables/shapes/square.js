@@ -19,23 +19,23 @@ define(["lib/drawable"], function(Drawable) {
       this.borderThickness = borderThickness;
     }
 
-    draw(context, centerX, centerY, screenX, screenY, pixelsPerUnit) {
-      var positionX = this.positionX * pixelsPerUnit;
-      var positionY = this.positionY * pixelsPerUnit;
-      var width = this.width * pixelsPerUnit;
-      var height = this.height * pixelsPerUnit;
+    draw(canvas) {
+      var positionX = this.positionX * canvas.pixelsPerUnitHorizontal;
+      var positionY = this.positionY * canvas.pixelsPerUnitHorizontal;
+      var width = this.width * canvas.pixelsPerUnitHorizontal;
+      var height = this.height * canvas.pixelsPerUnitHorizontal;
 
-      context.fillStyle = this.fillColor || "black";
-      context.fillRect(centerX + positionX, centerY + positionY, width, height);
-      context.beginPath();
-      context.strokeStyle = this.strokeColor || "red";
-      context.lineWidth = this.borderThickness;
-      context.strokeRect(centerX + positionX, centerY + positionY, width, height);
-      context.closePath();
-      context.lineWidth = 1;
+      canvas.context.fillStyle = this.fillColor || "black";
+      canvas.context.fillRect(canvas.centerX + positionX, canvas.centerY + positionY, width, height);
+      canvas.context.beginPath();
+      canvas.context.strokeStyle = this.strokeColor || "red";
+      canvas.context.lineWidth = this.borderThickness;
+      canvas.context.strokeRect(canvas.centerX + positionX, canvas.centerY + positionY, width, height);
+      canvas.context.closePath();
+      canvas.context.lineWidth = 1;
     }
 
-    inBounds(centerX, centerY, screenX, screenY) {
+    inBounds() {
       return true;
     }
   }
