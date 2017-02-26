@@ -6,6 +6,10 @@ It uses RequireJS to modulize the code OOP-style!
 
 If anybody is interested in contributing you're more than welcome :-)
 
+[Demo: ](http://htmlpreview.github.io/?https://github.com/LalaDK/draggable-canvas/blob/master/demo/index.html)
+
+
+
 # TODO
  - Keeping focus where mouse is when scaling
  - Scaling of one axes only
